@@ -186,7 +186,7 @@ function bindEvents(): void {
     "[data-plantilla]",
   )) {
     button.addEventListener("click", () => {
-      const id: unknown = button.dataset["plantilla"];
+      const id: unknown = button.dataset.plantilla;
       if (isPlantillaId(id)) setCode(PLANTILLAS[id]);
     });
   }

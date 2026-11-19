@@ -1,6 +1,6 @@
 import type { Theme } from "./theme";
 
-type MermaidApi = (typeof import("mermaid"))["default"];
+type MermaidApi = typeof import("mermaid")["default"];
 
 export type RenderResult =
   | { status: "ok"; svg: string }
@@ -55,9 +55,7 @@ export class DiagramRenderer {
     } catch (error) {
       // Mermaid deja su contenedor temporal en el DOM cuando el render falla.
       document.getElementById(`d${diagramId}`)?.remove();
-      return isStale()
-        ? STALE
-        : { status: "error", message: toMessage(error) };
+      return isStale() ? STALE : { status: "error", message: toMessage(error) };
     }
   }
 

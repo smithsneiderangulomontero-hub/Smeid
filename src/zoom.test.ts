@@ -44,7 +44,11 @@ describe("fitZoom", () => {
   });
 
   it("devuelve null con contenido o contenedor inutilizables", () => {
-    expect(fitZoom({ width: 0, height: 10 }, { width: 500, height: 500 })).toBeNull();
-    expect(fitZoom({ width: 10, height: 10 }, { width: 20, height: 500 })).toBeNull();
+    expect(
+      fitZoom({ width: 0, height: 10 }, { width: 500, height: 500 }),
+    ).toBeNull();
+    expect(
+      fitZoom({ width: 10, height: 10 }, { width: 20, height: 500 }),
+    ).toBeNull();
   });
 });
