@@ -39,6 +39,6 @@
     "vitest": "^5.1.1"
   },
   "dependencies": {
-    "mermaid": "^11.17.2"
+    "mermaid": "^12.3.0"
   }
 }
