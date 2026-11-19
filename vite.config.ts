@@ -67,6 +67,8 @@ function licenseFiles(): Plugin {
 }
 
 export default defineConfig({
+  // Rutas relativas: el build funciona en cualquier subruta (p. ej. GitHub Pages).
+  base: "./",
   plugins: [contentSecurityPolicy(), licenseFiles()],
   build: {
     target: "es2022",

@@ -1,5 +1,8 @@
 # SMEID
 
+[![CI](https://github.com/smithsneiderangulomontero-hub/Smeid/actions/workflows/ci.yml/badge.svg)](https://github.com/smithsneiderangulomontero-hub/Smeid/actions/workflows/ci.yml)
+[![Licencia: MIT](https://img.shields.io/badge/licencia-MIT-green.svg)](./LICENSE)
+
 Proyecto de software libre y sin fines de lucro. Visor y editor local de diagramas escritos con la sintaxis de [Mermaid](https://mermaid.js.org/): edición en vivo, zoom/desplazamiento, tema claro/oscuro, plantillas y exportación a SVG/PNG. Todo se ejecuta en el navegador; el código del diagrama solo se guarda en `localStorage`.
 
 > SMEID es un proyecto independiente. **No está afiliado, patrocinado ni respaldado** por Mermaid, el proyecto `mermaid-js`, ni por Mermaid Chart / Mermaid Chart Inc. "Mermaid" y otros nombres citados pertenecen a sus respectivos titulares y se usan solo para describir la compatibilidad con su sintaxis.
@@ -8,16 +11,29 @@ Proyecto de software libre y sin fines de lucro. Visor y editor local de diagram
 
 - Node.js >= 20
 
+## Inicio rápido
+
+```bash
+npm install   # solo la primera vez
+npm run dev   # abre la URL que muestra (normalmente http://localhost:5173)
+```
+
+> **No abras `index.html` con doble clic** (`file://`): la app está escrita en TypeScript y necesita pasar por Vite. Si lo haces verás la interfaz, pero ningún botón funcionará.
+
+Para servir una versión de producción: `npm run build && npm run preview`.
+
 ## Scripts
 
-| Comando             | Descripción                                        |
-| ------------------- | -------------------------------------------------- |
-| `npm run dev`       | Servidor de desarrollo con HMR                     |
-| `npm run build`     | Typecheck + build de producción en `dist/`         |
-| `npm run preview`   | Sirve el build (con la CSP de producción aplicada) |
-| `npm run typecheck` | Comprueba tipos sin generar archivos               |
-| `npm run licenses`  | Regenera `THIRD_PARTY_LICENSES.md`                 |
-| `npm test`          | Ejecuta los tests unitarios (Vitest)               |
+| Comando             | Descripción                                         |
+| ------------------- | --------------------------------------------------- |
+| `npm run dev`       | Servidor de desarrollo con HMR                      |
+| `npm run build`     | Typecheck + build de producción en `dist/`          |
+| `npm run preview`   | Sirve el build (con la CSP de producción aplicada)  |
+| `npm run typecheck` | Comprueba tipos sin generar archivos                |
+| `npm run lint`      | Lint y formato con Biome (`lint:fix` para corregir) |
+| `npm run ci`        | Lint + tipos + tests + build (lo mismo que el CI)   |
+| `npm run licenses`  | Regenera `THIRD_PARTY_LICENSES.md`                  |
+| `npm test`          | Ejecuta los tests unitarios (Vitest)                |
 
 ## Arquitectura
 
@@ -65,7 +81,7 @@ El listado completo con los textos de licencia está en [THIRD_PARTY_LICENSES.md
 
 ## Contribuir
 
-Las contribuciones son bienvenidas. Al enviar un cambio aceptas que se publique bajo la licencia MIT del proyecto. No incluyas código copiado de fuentes con licencia incompatible, ni información confidencial de terceros (empresas, clientes) en plantillas, ejemplos o capturas.
+Las contribuciones son bienvenidas: lee [CONTRIBUTING.md](./CONTRIBUTING.md) y el [Código de Conducta](./CODE_OF_CONDUCT.md). Para reportar vulnerabilidades, consulta [SECURITY.md](./SECURITY.md).
 
 ## Persistencia
 

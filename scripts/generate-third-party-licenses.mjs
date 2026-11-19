@@ -1,8 +1,9 @@
 // Genera THIRD_PARTY_LICENSES.md con las licencias de las dependencias de
 // producción (las que se empaquetan en el build). Ejecutar: npm run licenses
-import { init } from "license-checker-rseidelsohn";
+
 import { readFileSync, writeFileSync } from "node:fs";
 import { basename } from "node:path";
+import { init } from "license-checker-rseidelsohn";
 
 const OUTPUT = "THIRD_PARTY_LICENSES.md";
 
