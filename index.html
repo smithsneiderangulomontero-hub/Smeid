@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>SMEID · Visor de diagramas local</title>
+        <link rel="stylesheet" href="./styles.css" />
+    </head>
+    <body>
+        <aside id="panel-izq" class="panel-izq">
+            <header class="barra">
+                <div class="grupo-btns">
+                    <button
+                        id="tpl-roadmap"
+                        data-plantilla="roadmap"
+                        class="btn secundario"
+                        title="Cargar plantilla Roadmap TB"
+                    >
+                        <svg
+                            class="ico"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path d="M3 6h18M3 12h12M3 18h18" />
+                        </svg>
+                        <span>Roadmap</span>
+                    </button>
+                    <button
+                        id="tpl-arquitectura"
+                        data-plantilla="arquitectura"
+                        class="btn secundario"
+                        title="Cargar plantilla Arquitectura"
+                    >
+                        <svg
+                            class="ico"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <rect x="3" y="3" width="7" height="7" rx="1" />
+                            <rect x="14" y="3" width="7" height="7" rx="1" />
+                            <rect x="8.5" y="14" width="7" height="7" rx="1" />
+                        </svg>
+                        <span>Arq.</span>
+                    </button>
+                    <button
+                        id="tpl-limpiar"
+                        class="btn secundario"
+                        title="Limpiar editor"
+                    >
+                        <svg
+                            class="ico"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6" />
+                        </svg>
+                        <span>Limpiar</span>
+                    </button>
+                </div>
+
+                <div class="grupo-btns">
+                    <button
+                        id="btn-tema"
+                        class="btn icono-solo"
+                        title="Cambiar tema claro/oscuro"
+                        aria-label="Cambiar tema"
+                        aria-pressed="false"
+                    >
+                        <svg
+                            id="ico-tema"
+                            class="ico"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path
+                                d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79Z"
+                            />
+                        </svg>
+                    </button>
+                    <button
+                        id="btn-copiar"
+                        class="btn icono-solo"
+                        title="Copiar código"
+                        aria-label="Copiar código"
+                    >
+                        <svg
+                            class="ico"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <rect x="9" y="9" width="13" height="13" rx="2" />
+                            <path
+                                d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                            />
+                        </svg>
+                    </button>
+                    <button
+                        id="btn-svg"
+                        class="btn secundario"
+                        title="Exportar SVG"
+                    >
+                        <svg
+                            class="ico"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path
+                                d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
+                            />
+                            <path d="m7 10 5 5 5-5M12 15V3" />
+                        </svg>
+                        <span>SVG</span>
+                    </button>
+                    <button
+                        id="btn-png"
+                        class="btn primario"
+                        title="Exportar PNG"
+                    >
+                        <svg
+                            class="ico"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <circle cx="8.5" cy="8.5" r="1.5" />
+                            <path d="m21 15-5-5L5 21" />
+                        </svg>
+                        <span>PNG</span>
+                    </button>
+                </div>
+            </header>
+
+            <div class="subbarra-code">
+                <span class="etiqueta-code">CODE · SMEID</span>
+                <button
+                    id="btn-contraer-panel"
+                    class="btn suave icono-solo"
+                    title="Contraer panel de código"
+                    aria-label="Contraer panel de código"
+                >
+                    <svg
+                        class="ico"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <path d="m15 18-6-6 6-6" />
+                    </svg>
+                </button>
+            </div>
+
+            <textarea
+                id="codigo"
+                aria-label="Código del diagrama Mermaid"
+                spellcheck="false"
+                placeholder="Escribe o pega tu diagrama Mermaid aquí (ej. flowchart TB)..."
+            ></textarea>
+        </aside>
+
+        <main class="panel-der">
+            <div class="barra-zoom">
+                <div class="controles-zoom">
+                    <button
+                        id="btn-toggle-code"
+                        class="btn suave"
+                        title="Mostrar u ocultar panel de código"
+                        aria-expanded="true"
+                    >
+                        <svg
+                            class="ico"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <polyline points="16 18 22 12 16 6" />
+                            <polyline points="8 6 2 12 8 18" />
+                        </svg>
+                        <span>CODE</span>
+                    </button>
+
+                    <span class="separador-barra" aria-hidden="true"></span>
+
+                    <button
+                        id="zoom-out"
+                        class="btn suave icono-solo"
+                        title="Alejar"
+                        aria-label="Alejar"
+                    >
+                        <svg
+                            class="ico"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="m21 21-4.35-4.35M8 11h6" />
+                        </svg>
+                    </button>
+                    <span id="zoom-valor" class="etiqueta-zoom">100%</span>
+                    <button
+                        id="zoom-in"
+                        class="btn suave icono-solo"
+                        title="Acercar"
+                        aria-label="Acercar"
+                    >
+                        <svg
+                            class="ico"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="m21 21-4.35-4.35M11 8v6M8 11h6" />
+                        </svg>
+                    </button>
+                    <button
+                        id="zoom-reset"
+                        class="btn suave"
+                        title="Restablecer zoom a 100%"
+                    >
+                        100%
+                    </button>
+                    <button
+                        id="zoom-fit"
+                        class="btn suave"
+                        title="Ajustar al contenedor"
+                    >
+                        <svg
+                            class="ico"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                        </svg>
+                        <span>Ajustar</span>
+                    </button>
+                    <button
+                        id="btn-manito"
+                        class="btn suave"
+                        title="Activar o desactivar mover con manito"
+                        aria-pressed="false"
+                    >
+                        <svg
+                            class="ico"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path d="M18 11V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2v5" />
+                            <path d="M14 10V4a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7" />
+                            <path
+                                d="M10 10.5V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2v8"
+                            />
+                            <path
+                                d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"
+                            />
+                        </svg>
+                        <span>Manito</span>
+                    </button>
+                </div>
+                <span id="estado-guardado" class="estado-guardado"
+                    >Guardado local activo</span
+                >
+            </div>
+
+            <section id="salida">
+                <div id="lienzo" aria-live="polite"></div>
+            </section>
+
+            <pre id="log" role="alert"></pre>
+        </main>
+
+        <script type="module" src="/src/main.ts"></script>
+    </body>
+</html>
