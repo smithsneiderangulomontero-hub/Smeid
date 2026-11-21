@@ -68,7 +68,14 @@ export class DiagramRenderer {
       securityLevel: "strict",
       suppressErrorRendering: true,
       theme: theme === "dark" ? "dark" : "default",
+      // Sin <foreignObject>: el HTML incrustado "contamina" el canvas y hace
+      // imposible exportar a PNG; con texto SVG el resultado es autocontenido.
+      htmlLabels: false,
       flowchart: {
+        htmlLabels: false,
+        // Por defecto (200) parte a mitad de palabra los compuestos largos del
+        // alemán, p. ej. "Authentifizierungsdienst".
+        wrappingWidth: 280,
         curve: "basis",
         nodeSpacing: 35,
         rankSpacing: 55,
