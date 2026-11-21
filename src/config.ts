@@ -2,6 +2,7 @@
 export const STORAGE_KEYS = {
   code: "smeid_mermaid_codigo_v1",
   theme: "smeid_mermaid_tema_v1",
+  locale: "smeid_idioma_v1",
 } as const;
 
 export const ZOOM = {

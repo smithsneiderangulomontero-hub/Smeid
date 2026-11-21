@@ -52,10 +52,22 @@ src/
   exporter.ts     Exportación a SVG y PNG
   zoom.ts         Lógica pura de zoom (testeable)
   debounce.ts     Utilidad de debounce
-  templates.ts    Plantillas de diagramas
+  templates.ts    Plantillas de diagramas (traducidas a cada idioma)
+  i18n/           Internacionalización: catálogos por idioma (locales/), detección y DOM
 ```
 
 Principios: la lógica pura (`zoom`, `svg.computeViewBox`, `debounce`) está separada del DOM para poder testearla; los módulos con DOM reciben sus dependencias por constructor o parámetro; el estado compartido se limita a `main.ts`.
+
+## Idiomas
+
+La interfaz está disponible en **español, inglés, italiano, catalán y alemán**. Se cambia desde el selector de la barra superior derecha.
+
+- Al abrir por primera vez se usa el idioma del navegador (si no está soportado, inglés).
+- Tu elección se guarda y tiene prioridad en las siguientes visitas.
+- Las plantillas de ejemplo (Roadmap y Arquitectura) también se traducen. Si no has editado la plantilla que estás viendo, se re-traduce al cambiar de idioma; tu propio código nunca se modifica.
+- Los mensajes de error de sintaxis del diagrama los genera Mermaid y siempre salen en inglés.
+
+Para añadir un idioma, consulta [CONTRIBUTING.md](./CONTRIBUTING.md#añadir-o-corregir-un-idioma).
 
 ## Seguridad
 
@@ -75,6 +87,7 @@ SMEID se distribuye bajo la licencia [MIT](./LICENSE): puedes usarlo, copiarlo, 
 SMEID se apoya en software libre de terceros, entre otros:
 
 - [Mermaid](https://github.com/mermaid-js/mermaid): licencia MIT. La librería es libre y gratuita; _Mermaid Chart_ es un producto comercial aparte, que SMEID no utiliza.
+- [elkjs](https://github.com/kieler/elkjs) (dependencia de Mermaid 12): doble licencia `EPL-2.0 OR GPL-3.0-or-later`. SMEID la usa bajo **EPL-2.0**, sin modificarla, y conserva su texto de licencia. EPL-2.0 es copyleft débil: si modificas el código de `elkjs`, esos cambios deben publicarse bajo EPL-2.0. No afecta al código propio de SMEID, que sigue siendo MIT.
 - [Vite](https://vite.dev/) y [Vitest](https://vitest.dev/) (desarrollo): licencia MIT.
 
 El listado completo con los textos de licencia está en [THIRD_PARTY_LICENSES.md](./THIRD_PARTY_LICENSES.md) y se incluye dentro de `dist/` en cada build. Si cambias dependencias, regéneralo con `npm run licenses`.
@@ -89,3 +102,4 @@ Las contribuciones son bienvenidas: lee [CONTRIBUTING.md](./CONTRIBUTING.md) y e
 | ------------------------- | --------------------------------------------------- |
 | `smeid_mermaid_codigo_v1` | Código del editor                                   |
 | `smeid_mermaid_tema_v1`   | `"light"` o `"dark"` (si falta, usa el del sistema) |
+| `smeid_idioma_v1`         | Código de idioma (`es`, `en`, `it`, `ca`, `de`)     |

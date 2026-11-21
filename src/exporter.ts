@@ -1,6 +1,16 @@
 import { EXPORT } from "./config";
 import { readSvgSize } from "./svg";
 
+export type ExportErrorCode = "image" | "png" | "canvas";
+
+/** Error de exportación con un código estable que la interfaz traduce. */
+export class ExportError extends Error {
+  constructor(readonly code: ExportErrorCode) {
+    super(`Export failed: ${code}`);
+    this.name = "ExportError";
+  }
+}
+
 function serialize(svg: SVGElement): string {
   return new XMLSerializer().serializeToString(svg);
 }
@@ -18,8 +28,7 @@ function loadImage(url: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
     const image = new Image();
     image.onload = () => resolve(image);
-    image.onerror = () =>
-      reject(new Error("No se pudo cargar el SVG como imagen."));
+    image.onerror = () => reject(new ExportError("image"));
     image.src = url;
   });
 }
@@ -27,8 +36,7 @@ function loadImage(url: string): Promise<HTMLImageElement> {
 function canvasToBlob(canvas: HTMLCanvasElement): Promise<Blob> {
   return new Promise((resolve, reject) => {
     canvas.toBlob(
-      (blob) =>
-        blob ? resolve(blob) : reject(new Error("No se pudo generar el PNG.")),
+      (blob) => (blob ? resolve(blob) : reject(new ExportError("png"))),
       "image/png",
     );
   });
@@ -66,7 +74,7 @@ export async function exportPng(
     canvas.height = height * EXPORT.pngScale;
 
     const context = canvas.getContext("2d");
-    if (!context) throw new Error("Canvas 2D no disponible.");
+    if (!context) throw new ExportError("canvas");
 
     context.fillStyle = background;
     context.fillRect(0, 0, canvas.width, canvas.height);

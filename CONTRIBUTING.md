@@ -36,9 +36,25 @@ npm run dev
 - **Seguridad**: no uses `innerHTML` con contenido que no provenga de `mermaid.render`. Los mensajes de error se muestran con `textContent`.
 - **CSP**: no añadas scripts externos ni `eval`; el build aplica una política estricta.
 
+## Añadir o corregir un idioma
+
+Los textos viven en `src/i18n/locales/` (un archivo por idioma). `es.ts` es el catálogo base: sus claves definen el tipo `MessageKey`, y el resto de idiomas deben tener **exactamente** las mismas (el typecheck y los tests lo comprueban).
+
+Para **corregir una traducción**, edita el archivo del idioma.
+
+Para **añadir un idioma** (por ejemplo francés, `fr`):
+
+1. Crea `src/i18n/locales/fr.ts` copiando `en.ts` y traduciendo los valores (no las claves).
+2. En `src/i18n/index.ts`: importa `fr`, añádelo a `LOCALES` (con su nombre en ese idioma, p. ej. `Français`) y a `CATALOGS`.
+3. En `src/templates.ts`: añade las entradas `fr` en `ROADMAP_TEXT` y `ARCHITECTURE_TEXT`. Evita comillas dobles (`"`) dentro de los textos.
+4. Ejecuta `npm run ci`. Los tipos te avisarán si falta alguna clave o idioma.
+5. Prueba con `npm run dev` que los textos no se desbordan y que las plantillas se ven bien (los compuestos largos pueden partirse).
+
+Si añades texto nuevo a la interfaz, añade la clave en `es.ts` y en todos los demás idiomas, y en el HTML usa `data-i18n` (texto), `data-i18n-title`, `data-i18n-aria-label` o `data-i18n-placeholder`. Los textos generados desde TypeScript se piden con `t("clave")`.
+
 ## Dependencias y licencias
 
-Solo se aceptan dependencias con licencia permisiva compatible con MIT (MIT, ISC, BSD, Apache-2.0). Si añades o cambias dependencias de producción, ejecuta `npm run licenses` y confirma el cambio de `THIRD_PARTY_LICENSES.md`.
+Se prefieren dependencias con licencia permisiva compatible con MIT (MIT, ISC, BSD, Apache-2.0). La única excepción actual es `elkjs` (dependencia de Mermaid, `EPL-2.0 OR GPL-3.0-or-later`), que usamos bajo EPL-2.0 sin modificarla; no añadas otras dependencias con copyleft sin abrir antes un issue. Si añades o cambias dependencias de producción, ejecuta `npm run licenses` y confirma el cambio de `THIRD_PARTY_LICENSES.md`.
 
 ## Qué no incluir
 

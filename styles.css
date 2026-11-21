@@ -19,6 +19,7 @@
 }
 
 body.oscuro {
+  color-scheme: dark;
   --bg-app: #0b1120;
   --bg-panel: #111827;
   --bg-barra: #090d16;
@@ -175,6 +176,43 @@ body {
 
 .btn.icono-solo {
   padding: 6px 8px;
+}
+
+.btn:focus-visible,
+.selector-idioma select:focus-visible {
+  outline: 2px solid var(--btn-primario);
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.acciones-barra {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.selector-idioma {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+}
+
+.selector-idioma select {
+  font-family: inherit;
+  padding: 5px 8px;
 }
 
 .ico {
